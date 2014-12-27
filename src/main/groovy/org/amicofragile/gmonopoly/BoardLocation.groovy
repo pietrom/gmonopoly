@@ -10,4 +10,12 @@ class BoardLocation {
 	def next() {
 		next
 	}
+	
+	def next(int steps) {
+		if(steps == 1) {
+			next()
+		} else {
+			next.next(steps -1)
+		}
+	}
 }

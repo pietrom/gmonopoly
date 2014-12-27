@@ -17,4 +17,17 @@ class BoardLocationTest {
 		loc1.next = loc2
 		assertEquals(loc2, loc1.next())
 	}
+	
+	@org.junit.Test
+	void nextNavigationCanBeRecursive() {
+		def loc0 = new BoardLocation("L0")
+		def prev = loc0
+		(1..5).each {
+			println it
+			def loc = new BoardLocation("L${it}")
+			prev.next = loc
+			prev = loc
+		}
+		assertEquals("L4", loc0.next(4).name)
+	}
 }
