@@ -3,6 +3,8 @@ package org.amicofragile.gmonopoly
 class BoardLocation {
 	def name
 	def next
+	def players = []
+	
 	def BoardLocation(String name) {
 		this.name = name
 	}
@@ -17,5 +19,13 @@ class BoardLocation {
 		} else {
 			next.next(steps -1)
 		}
+	}
+	
+	def checkIn(Player p) {
+		players << p
+	}
+	
+	def String toString() {
+		"${name}: " + players.join(", ")
 	}
 }

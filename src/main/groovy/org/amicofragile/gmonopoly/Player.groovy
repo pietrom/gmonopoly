@@ -5,6 +5,11 @@ class Player {
 	def BoardLocation location
 	
 	def checkInTo(loc) {
+		loc.checkIn(this)
 		location = loc
+	}
+	
+	def String toString() {
+		name
 	}
 }

@@ -34,4 +34,13 @@ class BoardTest {
 		def loc3 = board.getLocationAt(4)
 		assertEquals(loc3, loc36.next(7))
 	}
+	
+	@org.junit.Test
+	void toStringShowsLocation() {
+		def board = new Board()
+		(1..5).each {
+			board.addLocation(new BoardLocation("BL${it}"))
+		}
+		
+	}
 }

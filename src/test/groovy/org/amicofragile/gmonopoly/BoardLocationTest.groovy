@@ -23,11 +23,20 @@ class BoardLocationTest {
 		def loc0 = new BoardLocation("L0")
 		def prev = loc0
 		(1..5).each {
-			println it
 			def loc = new BoardLocation("L${it}")
 			prev.next = loc
 			prev = loc
 		}
 		assertEquals("L4", loc0.next(4).name)
+	}
+	
+	@org.junit.Test
+	void playersCanCheckin() {
+		def loc = new BoardLocation("Somewhere")
+		def horse = new Player(name : "Horse")
+		horse.checkInTo(loc)
+		def cat = new Player(name : "Cat")
+		cat.checkInTo(loc)
+		assertEquals("Somewhere: Horse, Cat", loc.toString())
 	}
 }
