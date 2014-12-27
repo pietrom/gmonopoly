@@ -19,4 +19,8 @@ class Board {
 	def getLocationAt(int index) {
 		locations[index]
 	}
+	
+	def String toString() {
+		locations.join("\n")
+	}
 }

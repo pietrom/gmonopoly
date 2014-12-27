@@ -41,6 +41,14 @@ class BoardTest {
 		(1..5).each {
 			board.addLocation(new BoardLocation("BL${it}"))
 		}
-		
+		new Player(name : "PL").checkInTo(board.last)
+		def expected = """
+BL1: 
+BL2: 
+BL3: 
+BL4: 
+BL5: PL
+""".trim()
+		assertEquals(expected, board.toString())
 	}
 }
