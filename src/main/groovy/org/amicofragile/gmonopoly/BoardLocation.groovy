@@ -25,6 +25,10 @@ class BoardLocation {
 		players << p
 	}
 	
+	def checkOut(Player p) {
+		players.remove(p)
+	}
+	
 	def String toString() {
 		"${name}: " + players.join(", ")
 	}

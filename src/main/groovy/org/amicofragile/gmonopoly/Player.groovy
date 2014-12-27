@@ -12,4 +12,10 @@ class Player {
 	def String toString() {
 		name
 	}
+	
+	def roll(int dicesValue) {
+		location.checkOut(this)
+		location = location.next(dicesValue)
+		location.checkIn(this)
+	}
 }
