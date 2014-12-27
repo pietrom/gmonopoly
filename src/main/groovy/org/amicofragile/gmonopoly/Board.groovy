@@ -10,6 +10,7 @@ class Board {
 			last = l
 		} else {
 			last.next = l
+			l.next = first
 			last = l
 		}
 		locations << l
