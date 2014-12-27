@@ -12,4 +12,12 @@ class PlayerTest {
 		assertEquals(NAME, player.name)
 		assertEquals(LOCATION, player.location)
 	}
+	
+	@org.junit.Test
+	void checkInToALocation() {
+		def player = new Player(name : NAME)
+		assertNull(player.location)
+		player.checkInTo(LOCATION)
+		assertEquals(LOCATION, player.location)
+	}
 }
