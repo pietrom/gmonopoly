@@ -1,8 +1,8 @@
 package org.amicofragile.gmonopoly
 
 class Player {
-	def String name
-	def BoardLocation location
+	private String name
+	private BoardLocation location
 	
 	def Player(String name) {
 		this(name, null)

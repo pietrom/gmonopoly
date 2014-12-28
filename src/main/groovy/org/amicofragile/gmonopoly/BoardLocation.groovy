@@ -1,9 +1,9 @@
 package org.amicofragile.gmonopoly
 
 class BoardLocation {
-	def name
-	def next
-	def players = []
+	private String name
+	private BoardLocation next
+	private List players = []
 	
 	def BoardLocation(String name) {
 		this.name = name

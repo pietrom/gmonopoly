@@ -1,8 +1,8 @@
 package org.amicofragile.gmonopoly
 
 class Board {
-	def List locations = []
-	def first, last
+	private List locations = []
+	private BoardLocation first, last
 	
 	def addLocation(BoardLocation l) {
 		if(locations.isEmpty()) {
