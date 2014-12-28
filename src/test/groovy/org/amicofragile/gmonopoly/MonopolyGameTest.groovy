@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 class MonopolyGameTest {
-	def static final StepsGenerator DICE_PAIR = new DicePair()
-	
 	@org.junit.Test
 	void initialLocationIsTheFirstForEveryUser() {
 		def board = new Board()
@@ -17,7 +15,7 @@ class MonopolyGameTest {
 		(1..3).each {
 			players << new Player("PL${it}")
 		}
-		def game = new MonopolyGame(board, DICE_PAIR, players)
+		def game = new MonopolyGame(board, players)
 		(0..2).each {
 			assertEquals(board.getLocationAt(0), players[it].location)
 		}
@@ -28,7 +26,7 @@ class MonopolyGameTest {
 		def board = new Board()
 		def players = []
 		players.add(new Player("Eddie"))
-		def game = new MonopolyGame(board, DICE_PAIR, players)
+		def game = new MonopolyGame(board, players)
 	}
 	
 	@org.junit.Test(expected = IllegalArgumentException.class)
@@ -38,7 +36,7 @@ class MonopolyGameTest {
 		9.times {
 			players.add(new Player("PL${it}"))
 		}
-		def game = new MonopolyGame(board, DICE_PAIR, players)
+		def game = new MonopolyGame(board, players)
 	}
 	
 	@org.junit.Test
@@ -59,7 +57,7 @@ class MonopolyGameTest {
 		def order12occurred = false
 		def order21occurred = false
 		100.times {
-			def game = new MonopolyGame(new Board(), DICE_PAIR, players)
+			def game = new MonopolyGame(new Board(), players)
 			accumulator = ""
 			game.play()
 			if(accumulator.equals("12" * 20)) {
@@ -76,20 +74,23 @@ class MonopolyGameTest {
 	}
 	
 	@org.junit.Test
-	void finalPlayerPositionDependsOnStepsGenerator() {
-		def generator = new FixedStepsGenerator(4)
+	void finalPlayerLocationsAreCasual() {
 		def board = new Board()
 		(1..40).each {
 			board.addLocation(new BoardLocation("LOC-${it}"))
 		}
 		def players = []
-		(1..3).each {
+		(1..8).each {
 			players << new Player("PL-${it}")
 		}
-		def game = new MonopolyGame(board, generator, players)
+		def game = new MonopolyGame(board, players)
 		game.play()
+		def finalLocations = []
 		players.each {
-			assertEquals("LOC-1", it.location.name)
+			if(!finalLocations.contains(it.location.name)) {
+				finalLocations << it.location.name
+			}
 		}
+		assertTrue(finalLocations.size() >= 5)
 	}
 }

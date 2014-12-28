@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 class DicePairTest {
 	@org.junit.Test
 	void rollingTheDicesTwoHundredTimesGenerateAtLeastTenDifferentNumbers() {
-		StepsGenerator generator = new DicePair()
+		def generator = new DicePair()
 		def generated = []
 		200.times {
 			def current = generator.generateStepsNumber()

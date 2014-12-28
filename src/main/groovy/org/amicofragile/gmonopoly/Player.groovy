@@ -28,7 +28,7 @@ class Player {
 		location.checkIn(this)
 	}
 	
-	def play(StepsGenerator gen) {
+	def play(DicePair gen) {
 		int steps = gen.generateStepsNumber()
 		move(steps)
 	}
