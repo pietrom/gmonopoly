@@ -55,4 +55,30 @@ class PlayerTest {
 		assertFalse(start.players.contains(player))
 		assertTrue(stop.players.contains(player))
 	}
+	
+	@org.junit.Test
+	void moveFromStartLocation() {
+		def board = new Board()
+		(0..39).each {
+			board.addLocation(new BoardLocation("BL${it}"))
+		}
+		def player = new Player(NAME, board.getLocationAt(0))
+		def dices = new DicePair()
+		dices.metaClass.generateStepsNumber = { 7 }
+		player.play(dices)
+		assertEquals(board.getLocationAt(7), player.location)
+	}
+	
+	@org.junit.Test
+	void moveCrossingBoardLimit() {
+		def board = new Board()
+		(0..39).each {
+			board.addLocation(new BoardLocation("BL${it}"))
+		}
+		def player = new Player(NAME, board.getLocationAt(39))
+		def dices = new DicePair()
+		dices.metaClass.generateStepsNumber = { 6 }
+		player.play(dices)
+		assertEquals(board.getLocationAt(5), player.location)
+	}
 }
