@@ -13,7 +13,7 @@ class Player {
 		name
 	}
 	
-	def roll(int dicesValue) {
+	def move(int dicesValue) {
 		location.checkOut(this)
 		location = location.next(dicesValue)
 		location.checkIn(this)

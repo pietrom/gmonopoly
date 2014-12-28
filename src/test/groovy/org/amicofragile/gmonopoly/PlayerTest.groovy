@@ -35,7 +35,7 @@ class PlayerTest {
 			stop
 		}
 		def player = new Player(name : NAME, location: start)
-		player.roll(dicesValue)
+		player.move(dicesValue)
 		assertEquals(stop, player.location)
 		assertEquals(dicesValue, registeredSteps)
 	}
@@ -51,7 +51,7 @@ class PlayerTest {
 		player.checkInTo(start)
 		assertTrue(start.players.contains(player))
 		assertFalse(stop.players.contains(player))
-		player.roll(3)
+		player.move(3)
 		assertFalse(start.players.contains(player))
 		assertTrue(stop.players.contains(player))
 	}

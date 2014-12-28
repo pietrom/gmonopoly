@@ -45,14 +45,14 @@ class MonopolyGameTest {
 		def players = []
 		def horse = new Player(name : "Horse")
 		def horseRoundCount = 0
-		horse.metaClass.roll = { int dicesValue ->
+		horse.metaClass.move = { int dicesValue ->
 			horseRoundCount++
 		}
 		players.add(horse)
 		
 		def cat = new Player(name : "Cat")
 		def catRoundCount = 0
-		cat.metaClass.roll = { int dicesValue ->
+		cat.metaClass.move = { int dicesValue ->
 			catRoundCount++
 		}
 		players.add(cat)
@@ -66,11 +66,11 @@ class MonopolyGameTest {
 	void givenTwoPlayersInHundredGamesThanBothPossibleOrdersOccur() {
 		def accumulator = ""
 		def pl1 = new Player(name : "PL1")
-		pl1.metaClass.roll = { int dicesValue ->
+		pl1.metaClass.move = { int dicesValue ->
 			accumulator += "1"
 		}
 		def pl2 = new Player(name : "PL2")
-		pl2.metaClass.roll = { int dicesValue ->
+		pl2.metaClass.move = { int dicesValue ->
 			accumulator += "2"
 		}
 		def players = []

@@ -18,7 +18,7 @@ class MonopolyGame {
 	def play() {
 		Collections.shuffle(players)
 		20.times {
-			players.each { it.roll(7) }
+			players.each { it.move(7) }
 		}
 	}
 }
