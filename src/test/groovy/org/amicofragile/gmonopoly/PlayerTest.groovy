@@ -11,14 +11,14 @@ class PlayerTest {
 
 	@org.junit.Test
 	void playerHoldsNameAndLocation() {
-		def player = new Player(name : NAME, location: LOCATION)
+		def player = new Player(NAME, LOCATION)
 		assertEquals(NAME, player.name)
 		assertEquals(LOCATION, player.location)
 	}
 
 	@org.junit.Test
 	void checkInToALocation() {
-		def player = new Player(name : NAME)
+		def player = new Player(NAME)
 		assertNull(player.location)
 		player.checkInTo(LOCATION)
 		assertEquals(LOCATION, player.location)
@@ -34,7 +34,7 @@ class PlayerTest {
 			registeredSteps = i
 			stop
 		}
-		def player = new Player(name : NAME, location: start)
+		def player = new Player(NAME, start)
 		player.move(dicesValue)
 		assertEquals(stop, player.location)
 		assertEquals(dicesValue, registeredSteps)
@@ -47,7 +47,7 @@ class PlayerTest {
 		start.metaClass.next = { int i ->
 			stop
 		}
-		def player = new Player(name : NAME)
+		def player = new Player(NAME)
 		player.checkInTo(start)
 		assertTrue(start.players.contains(player))
 		assertFalse(stop.players.contains(player))

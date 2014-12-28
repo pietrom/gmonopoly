@@ -15,7 +15,7 @@ class MonopolyGameTest {
 		}
 		def players = []
 		(1..3).each {
-			players << new Player(name : "PL${it}")
+			players << new Player("PL${it}")
 		}
 		def game = new MonopolyGame(board, DICE_PAIR, players)
 		(0..2).each {
@@ -27,7 +27,7 @@ class MonopolyGameTest {
 	void cantPlayWithLesserThanTwoPlayers() {
 		def board = new Board()
 		def players = []
-		players.add(new Player(name : "Eddie"))
+		players.add(new Player("Eddie"))
 		def game = new MonopolyGame(board, DICE_PAIR, players)
 	}
 	
@@ -36,7 +36,7 @@ class MonopolyGameTest {
 		def board = new Board()
 		def players = []
 		9.times {
-			players.add(new Player(name : "PL${it}"))
+			players.add(new Player("PL${it}"))
 		}
 		def game = new MonopolyGame(board, DICE_PAIR, players)
 	}
@@ -44,11 +44,11 @@ class MonopolyGameTest {
 	@org.junit.Test
 	void givenTwoPlayersInHundredGamesThanBothPossibleOrdersOccurAndEachPlayerPlayedTwentyRounds() {
 		def accumulator = ""
-		def pl1 = new Player(name : "PL1")
+		def pl1 = new Player("PL1")
 		pl1.metaClass.move = { int dicesValue ->
 			accumulator += "1"
 		}
-		def pl2 = new Player(name : "PL2")
+		def pl2 = new Player("PL2")
 		pl2.metaClass.move = { int dicesValue ->
 			accumulator += "2"
 		}
@@ -84,7 +84,7 @@ class MonopolyGameTest {
 		}
 		def players = []
 		(1..3).each {
-			players << new Player(name : "PL-${it}")
+			players << new Player("PL-${it}")
 		}
 		def game = new MonopolyGame(board, generator, players)
 		game.play()

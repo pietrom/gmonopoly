@@ -41,7 +41,7 @@ class BoardTest {
 		(1..5).each {
 			board.addLocation(new BoardLocation("BL${it}"))
 		}
-		new Player(name : "PL").checkInTo(board.last)
+		new Player("PL").checkInTo(board.last)
 		def expected = """
 BL1: 
 BL2: 

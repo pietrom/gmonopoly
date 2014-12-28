@@ -33,9 +33,9 @@ class BoardLocationTest {
 	@org.junit.Test
 	void playersCanCheckin() {
 		def loc = new BoardLocation("Somewhere")
-		def horse = new Player(name : "Horse")
+		def horse = new Player("Horse")
 		horse.checkInTo(loc)
-		def cat = new Player(name : "Cat")
+		def cat = new Player("Cat")
 		cat.checkInTo(loc)
 		assertEquals("Somewhere: Horse, Cat", loc.toString())
 	}
