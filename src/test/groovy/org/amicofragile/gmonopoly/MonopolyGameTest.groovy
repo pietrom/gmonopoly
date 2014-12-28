@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 class MonopolyGameTest {
+	def static final StepsGenerator DICE_PAIR = new DicePair()
+	
 	@org.junit.Test
 	void initialLocationIsTheFirstForEveryUser() {
 		def board = new Board()
@@ -15,7 +17,7 @@ class MonopolyGameTest {
 		(1..3).each {
 			players << new Player(name : "PL${it}")
 		}
-		def game = new MonopolyGame(board, players)
+		def game = new MonopolyGame(board, DICE_PAIR, players)
 		(0..2).each {
 			assertEquals(board.getLocationAt(0), players[it].location)
 		}
@@ -26,7 +28,7 @@ class MonopolyGameTest {
 		def board = new Board()
 		def players = []
 		players.add(new Player(name : "Eddie"))
-		def game = new MonopolyGame(board, players)
+		def game = new MonopolyGame(board, DICE_PAIR, players)
 	}
 	
 	@org.junit.Test(expected = IllegalArgumentException.class)
@@ -36,7 +38,7 @@ class MonopolyGameTest {
 		9.times {
 			players.add(new Player(name : "PL${it}"))
 		}
-		def game = new MonopolyGame(board, players)
+		def game = new MonopolyGame(board, DICE_PAIR, players)
 	}
 	
 	@org.junit.Test
@@ -57,7 +59,7 @@ class MonopolyGameTest {
 		def order12occurred = false
 		def order21occurred = false
 		100.times {
-			def game = new MonopolyGame(new Board(), players)
+			def game = new MonopolyGame(new Board(), DICE_PAIR, players)
 			accumulator = ""
 			game.play()
 			if(accumulator.equals("12" * 20)) {
@@ -71,5 +73,23 @@ class MonopolyGameTest {
 		}
 		assertTrue(order12occurred)
 		assertTrue(order21occurred)
+	}
+	
+	@org.junit.Test
+	void finalPlayerPositionDependsOnStepsGenerator() {
+		def generator = new FixedStepsGenerator(4)
+		def board = new Board()
+		(1..40).each {
+			board.addLocation(new BoardLocation("LOC-${it}"))
+		}
+		def players = []
+		(1..3).each {
+			players << new Player(name : "PL-${it}")
+		}
+		def game = new MonopolyGame(board, generator, players)
+		game.play()
+		players.each {
+			assertEquals("LOC-1", it.location.name)
+		}
 	}
 }

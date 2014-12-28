@@ -18,4 +18,9 @@ class Player {
 		location = location.next(dicesValue)
 		location.checkIn(this)
 	}
+	
+	def play(StepsGenerator gen) {
+		int steps = gen.generateStepsNumber()
+		move(steps)
+	}
 }
