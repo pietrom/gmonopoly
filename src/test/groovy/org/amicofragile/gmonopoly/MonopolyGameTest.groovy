@@ -39,31 +39,8 @@ class MonopolyGameTest {
 		def game = new MonopolyGame(board, players)
 	}
 	
-	@Test
-	void everyPlayerPlaysTwentyRounds() {
-		def board = new Board()
-		def players = []
-		def horse = new Player(name : "Horse")
-		def horseRoundCount = 0
-		horse.metaClass.move = { int dicesValue ->
-			horseRoundCount++
-		}
-		players.add(horse)
-		
-		def cat = new Player(name : "Cat")
-		def catRoundCount = 0
-		cat.metaClass.move = { int dicesValue ->
-			catRoundCount++
-		}
-		players.add(cat)
-		def game = new MonopolyGame(board, players)
-		game.play()
-		assertEquals(20, horseRoundCount)
-		assertEquals(20, catRoundCount)
-	}
-	
 	@org.junit.Test
-	void givenTwoPlayersInHundredGamesThanBothPossibleOrdersOccur() {
+	void givenTwoPlayersInHundredGamesThanBothPossibleOrdersOccurAndEachPlayerPlayedTwentyRounds() {
 		def accumulator = ""
 		def pl1 = new Player(name : "PL1")
 		pl1.metaClass.move = { int dicesValue ->
