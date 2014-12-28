@@ -42,35 +42,35 @@ class MonopolyGameTest {
 	@org.junit.Test
 	void givenTwoPlayersInHundredGamesThanBothPossibleOrdersOccurAndEachPlayerPlayedTwentyRounds() {
 		def accumulator = ""
-		def pl1 = new Player("PL1")
-		pl1.metaClass.move = { int dicesValue ->
-			accumulator += "1"
+		def horse = new Player("Horse")
+		horse.metaClass.move = { int dicesValue ->
+			accumulator += "H"
 		}
-		def pl2 = new Player("PL2")
-		pl2.metaClass.move = { int dicesValue ->
-			accumulator += "2"
+		def car = new Player("Car")
+		car.metaClass.move = { int dicesValue ->
+			accumulator += "C"
 		}
 		def players = []
-		players.add(pl1)
-		players.add(pl2)
+		players.add(horse)
+		players.add(car)
 		
-		def order12occurred = false
-		def order21occurred = false
+		def orderHCoccurred = false
+		def orderCHoccurred = false
 		100.times {
 			def game = new MonopolyGame(new Board(), players)
 			accumulator = ""
 			game.play()
-			if(accumulator.equals("12" * 20)) {
-				order12occurred = true
-			} else if (accumulator.equals("21" * 20)) {
-				order21occurred = true
+			if(accumulator.equals("HC" * 20)) {
+				orderHCoccurred = true
+			} else if (accumulator.equals("CH" * 20)) {
+				orderCHoccurred = true
 			} else {
 			println accumulator
 				fail("Order cant'change during the game")
 			}
 		}
-		assertTrue(order12occurred)
-		assertTrue(order21occurred)
+		assertTrue(orderHCoccurred)
+		assertTrue(orderCHoccurred)
 	}
 	
 	@org.junit.Test
