@@ -30,4 +30,15 @@ class MonopolyMain {
 		}
 		return board
 	}
+	
+	static main(args) {
+		Scanner input = new Scanner(System.in)
+		input.useDelimiter(System.getProperty("line.separator"))
+		def players = []
+		args.each {
+			players << new Player(it)
+		}
+		def main = new MonopolyMain(input, System.out)
+		main.playTheGame(players)
+	}
 }
