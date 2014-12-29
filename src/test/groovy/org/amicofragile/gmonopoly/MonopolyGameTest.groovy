@@ -74,7 +74,9 @@ class MonopolyGameTest {
 	}
 
 	private playTheGame(MonopolyGame game) {
-		game.play()
+		while(!game.isCompleted()) {
+			game.playARound()
+		}
 	}
 	
 	@org.junit.Test

@@ -1,9 +1,11 @@
 package org.amicofragile.gmonopoly
 
 class MonopolyGame {
+	private static final int TOTAL_ROUNDS = 20
 	private Board board
 	private DicePair dices
 	private List players
+	private int playedRounds = 0
 
 	def MonopolyGame(Board board, List players) {
 		if(players.size() < 2 || players.size() > 8) {
@@ -17,10 +19,17 @@ class MonopolyGame {
 		}
 	}
 
-	def play() {
-		Collections.shuffle(players)
-		20.times {
+	def playARound() {
+		if(playedRounds == 0) {
+			Collections.shuffle(players)
+		} 
+		if(playedRounds < TOTAL_ROUNDS) {
 			players.each { it.play(dices) }
+			playedRounds++
 		}
+	}
+	
+	def isCompleted() {
+		playedRounds == TOTAL_ROUNDS
 	}
 }
