@@ -59,7 +59,7 @@ class MonopolyGameTest {
 		100.times {
 			def game = new MonopolyGame(new Board(), players)
 			accumulator = ""
-			game.play()
+			playTheGame(game)
 			if(accumulator.equals("HC" * 20)) {
 				orderHCoccurred = true
 			} else if (accumulator.equals("CH" * 20)) {
@@ -71,6 +71,10 @@ class MonopolyGameTest {
 		}
 		assertTrue(orderHCoccurred)
 		assertTrue(orderCHoccurred)
+	}
+
+	private playTheGame(MonopolyGame game) {
+		game.play()
 	}
 	
 	@org.junit.Test
@@ -84,7 +88,7 @@ class MonopolyGameTest {
 			players << new Player("PL-${it}")
 		}
 		def game = new MonopolyGame(board, players)
-		game.play()
+		playTheGame(game)
 		def finalLocations = []
 		players.each {
 			if(!finalLocations.contains(it.location.name)) {
