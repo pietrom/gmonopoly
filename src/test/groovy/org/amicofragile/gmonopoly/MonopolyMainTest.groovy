@@ -8,6 +8,7 @@ class MonopolyMainTest {
 	private Scanner input
 	private ByteArrayOutputStream outputBuffer
 	private PrintStream output
+	def static final PLAYERS = [new Player("Horse"), new Player("Cat")]
 	
 	@Before
 	public void initOutput() {
@@ -26,11 +27,22 @@ class MonopolyMainTest {
 	}
 	
 	@org.junit.Test
-	void singleRoundAndExit() {
-		setInput("exit") 
+	void welcomeAndGoodBye() {
 		def main = new MonopolyMain(input, output)
-		main.playTheGame()
+		main.playTheGame(PLAYERS)
 		assertOutputContains("Welcome to Monopoly")
 		assertOutputContains("Bye.")
+	}
+	
+	@org.junit.Test
+	void showsBoardLayout() {
+		setInput("exit")
+		def main = new MonopolyMain(input, output)
+		final String fixedLayout = "MONOPOLY BOARD LAYOUT"
+		Board.metaClass.toString = { ->
+			fixedLayout
+		}
+		main.playTheGame(PLAYERS)
+		assertOutputContains(fixedLayout)
 	}
 }

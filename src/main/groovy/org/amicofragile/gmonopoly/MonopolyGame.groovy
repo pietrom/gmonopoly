@@ -15,7 +15,7 @@ class MonopolyGame {
 		this.dices = new DicePair()
 		this.players = players
 		players.each {
-			it.location = board.first
+			it.checkInTo(board.first)
 		}
 	}
 
