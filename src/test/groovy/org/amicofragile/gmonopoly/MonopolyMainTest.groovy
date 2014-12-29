@@ -26,8 +26,20 @@ class MonopolyMainTest {
 		assertTrue(outputInConsole.contains(s))
 	}
 	
+	def assertOutputContains(String s, int expectedCount) {
+		String outputInConsole = outputBuffer.toString()
+		int howManyTimes = 0
+		int index = outputInConsole.indexOf(s)
+		while(index >= 0 && outputInConsole.size() > index) {
+			howManyTimes++
+			index = outputInConsole.indexOf(s, index + 1)
+		}
+		assertEquals(expectedCount, howManyTimes)
+	}
+	
 	@org.junit.Test
 	void welcomeAndGoodBye() {
+		setInput("exit")
 		def main = new MonopolyMain(input, output)
 		main.playTheGame(PLAYERS)
 		assertOutputContains("Welcome to Monopoly")
@@ -44,5 +56,17 @@ class MonopolyMainTest {
 		}
 		main.playTheGame(PLAYERS)
 		assertOutputContains(fixedLayout)
+	}
+	
+	@org.junit.Test
+	void threeIterations() {
+		setInput("A A exit")
+		def main = new MonopolyMain(input, output)
+		final String fixedLayout = "MONOPOLY BOARD LAYOUT"
+		Board.metaClass.toString = { ->
+			fixedLayout
+		}
+		main.playTheGame(PLAYERS)
+		assertOutputContains(fixedLayout, 3)
 	}
 }

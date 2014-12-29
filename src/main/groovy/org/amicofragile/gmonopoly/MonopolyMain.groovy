@@ -13,7 +13,13 @@ class MonopolyMain {
 		output.println "Welcome to Monopoly"
 		def board = buildBoard()
 		def game = new MonopolyGame(board, players)
-		output.println board.toString()
+		boolean go = true
+		while(go) {
+			output.println board.toString()
+			game.playARound()
+			def inputToken = input.next()
+			go = (!"exit".equalsIgnoreCase(inputToken))
+		}
 		output.println "Bye."
 	}
 	
