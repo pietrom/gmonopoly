@@ -69,4 +69,12 @@ class MonopolyMainTest {
 		main.playTheGame(PLAYERS)
 		assertOutputContains(fixedLayout, 3)
 	}
+	
+	@org.junit.Test
+	void twentyIterationsAndMore() {
+		setInput("A " * 25)
+		def main = new MonopolyMain(input, output)
+		main.playTheGame(PLAYERS)
+		assertOutputContains("Bye.")
+	}
 }

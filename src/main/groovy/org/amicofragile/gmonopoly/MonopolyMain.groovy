@@ -18,7 +18,7 @@ class MonopolyMain {
 			output.println board.toString()
 			game.playARound()
 			def inputToken = input.next()
-			go = (!"exit".equalsIgnoreCase(inputToken))
+			go = (!"exit".equalsIgnoreCase(inputToken) && !game.isCompleted())
 		}
 		output.println "Bye."
 	}
