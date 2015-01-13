@@ -57,7 +57,9 @@ class MonopolyGameTest {
 		def orderHCoccurred = false
 		def orderCHoccurred = false
 		100.times {
-			def game = new MonopolyGame(new Board(), players)
+			def board = new Board()
+			board.addLocation(new BoardLocation("LOC"))
+			def game = new MonopolyGame(board, players)
 			accumulator = ""
 			playTheGame(game)
 			if(accumulator.equals("HC" * 20)) {
